@@ -1,4 +1,4 @@
-setwd("C:/Users/TOriowo/Documents/PROJECTS/Correct/Heterozygosity/Coorect/Hap2")
+setwd("Hap2")
 
 
 library(tidyverse)
