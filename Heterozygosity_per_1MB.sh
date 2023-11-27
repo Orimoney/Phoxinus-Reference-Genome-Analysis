@@ -16,6 +16,9 @@ Sam_file="Phoxinus.sam" # alignment output file
 Bam_file="Phoxinus.bam" # Binary alignment output file
 Sorted_Bam_file="Phoxinus.sorted.bam"
 Sorted_deduped_Bam_file="Phoxinus.sorted.rm.bam"
+H1_bed="Hap1_intervals.bed"
+H1_coverage="Phoxinus_Hap1_perbase.coverage.txt"
+
 
 
 # Run Minimap2 with the following options:
@@ -44,6 +47,16 @@ samtools sort ${Bam_file} -T ../tmp/phoxinus -o ${Sorted_Bam_file}
 # -r: flag to remove duplicate instead of just flagging them
 # --overflow-list-size: increasing this reduces size of temporary files created, very important with a limited cluster
 sambamba markdup -r -t 40 ${Sorted_Bam_file} ${Sorted_deduped_Bam_file} --overflow-list-size 800000  --tmpdir=.../tmp
+
+#Create windows of 100 kb
+bedtools makewindows -g ${Reference}.fai -w 100000 > $H1_bed
+
+#bedtools coverage with the following parameters
+# -a: the windows created with makewindows above
+# -b: sorted and dedupped .bam file 
+# -g: reference genome
+# -sorted: to indicate that the .bam file is already sorted
+bedtools coverage -a $H1_bed -b $H1_bam  -sorted -g $Reference -mean > $H1_coverage
 
 
 ###################################################### Runs of Heterozygosity ###################################
