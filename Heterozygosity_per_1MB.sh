@@ -1,3 +1,4 @@
+#!/bin/bash
 ##Software requirements include:
                   #-Minimap2
                   #-Samtools/1.10
@@ -30,7 +31,7 @@ minimap2 -ax asm20 -t 32 ${Reference} ${Hifi_fq} -o ${Sam_file} --secondary=no
 
 samtools view -b -q 20  ${Sam_file} > ${Bam_file}
 
-#remove .sam files
+#remove .sam files tro save space
 rm ${Sam_file}
 
 #Sort .bam files
@@ -38,11 +39,10 @@ rm ${Sam_file}
 # -o: Output file
 samtools sort ${Bam_file} -T ../tmp/phoxinus -o ${Sorted_Bam_file}
 
-#!/bin/bash
 
 #Remove duplicates from sorted .bam files
 # -r: flag to remove duplicate instead of just flagging them
-# --overflow-list-size: increasing this reduces size of tempoorary files created, very important with a limited cluster
+# --overflow-list-size: increasing this reduces size of temporary files created, very important with a limited cluster
 sambamba markdup -r -t 40 ${Sorted_Bam_file} ${Sorted_deduped_Bam_file} --overflow-list-size 800000  --tmpdir=.../tmp
 
 
