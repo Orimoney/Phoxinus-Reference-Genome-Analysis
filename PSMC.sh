@@ -3,6 +3,7 @@
               #Bcftools v1.10.2
               #PSMC v0.6.5
 
+#This is important to ensure parallelization of jobs downstream
 echo "Task id is $SGE_TASK_ID"
 
 #Paths for input files and output directory, use full paths
@@ -36,7 +37,7 @@ fq2psmcfa -q20 Hap1.consensus.fq > Hap1.psmcfa
 splitfa Hap1.psmcfa > split.psmcfa
 
 #Then finally run the main psmc analysis on 100 randomly sampled sequences from the of the split psmcfa
-# b: ensures random sampling
+# -b: ensures random sampling
 
 for i in $(seq 1 100)
 do
