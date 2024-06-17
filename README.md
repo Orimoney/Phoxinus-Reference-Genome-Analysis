@@ -32,10 +32,34 @@ This PSMC (Pairwise Sequentially Markovian Coalescent) script reconstructs histo
 
 ## 6. Structural_Variation.sh
 ## Description
-This script identifies and analyzes structural variations within the genome. It leverages various tools to detect deletions, duplications, inversions, and translocations. It begins with  aligning both haplotypes with MINIMAP2 , identifying structural variants with SYRI and plotting the synteny and structural variants with PLOTSR. 
+This script identifies and analyzes structural variations within the genome. It leverages various tools to detect deletions, duplications, inversions, and translocations. It begins with  aligning both haplotypes with MINIMAP2 , identifying structural variants with SYRI and plotting the synteny and structural variants with PLOTSR.
 
+## 7. genome_assembly.sh
+## Description
+This script provides a comprehensive pipeline for genome assembly using HiFi reads, followed by duplicate removal, scaffolding, manual curation, and polishing. The prerequuisite tools for this pipeline includ:
+- HiFiasm
+- Purge Dups
+- SALSA2
+- BWA
+- Samtools
+- Minimap2
+- Bedtools
+- Pairtools
+- Cooler
+- PacBio HiFi (pbmm2)
+- Singularity
+- DeepVariant
+- BCFtools
 
+Parameters like number of threads can be adjusted based on available computational resources.
 
+## 8. Mapping_subreads_hifi_hic.sh
+## Description
+This script is designed to perform comprehensive mapping and quality assessment of subreads, HiFi, and Hi-C sequencing reads to a reference genome assembly. The script automates the alignment process, merging BAM files, and generating mapping statistics.
+
+## 9. Mercury_genome_completion_check.sh
+## Description
+This script assesses completion and quality of a genome assembly using Mercury.
 
 
 
